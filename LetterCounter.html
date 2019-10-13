@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input type="text" id="text" value="">
+
+<p>Click the button to count the letters of a text</p>
+
+<button onclick="analyzeLetters()">Process</button>
+<button type="button" onclick="reset()">Reset</button>
+
+<p id="demo"></p>
+
+<script>
+function analyzeLetters()
+{
+  //turns the text to lowercase
+  var text = document.getElementById("text").value.toLowerCase();
+
+  //makes string variables to hold the used and unused letters
+  var used = "";
+  var unused = "Unused letters: ";
+
+  if (text.length > 0) //verifies that the box isn't empty
+  {
+    for (var i = 97; i < 123; i++) //goes through all the letters
+    {
+      var count = 0; //makes a counter for the letters
+      for (var j = 0; j < text.length; j++) //goes through the text
+      {
+        if (text.charCodeAt(j) == i) //compares the letters
+        {
+          count++;
+        }
+      }
+
+      //either adds to used or unused
+      if (count>0)
+      {
+        used += String.fromCharCode(i) + ": " + count + "<br>";
+      }
+      else
+      {
+        unused += String.fromCharCode(i) + ", ";
+      }
+    }
+
+    if (unused.length > 16)
+    {
+      document.getElementById("demo").innerHTML =
+        used + unused.substring(0, unused.length-2);
+    }
+    else
+    {
+      document.getElementById("demo").innerHTML = used;
+    }
+  }
+
+  //deals with an empty text box
+  else
+  {
+    document.getElementById("demo").innerHTML = "Empty text box."
+  }
+}
+
+function reset()
+{
+  document.getElementById("demo").innerHTML = '';
+  document.getElementById("text").value = '';
+}
+
+</script>
+
+</body>
+</html>
